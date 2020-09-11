@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { User } from "../models/user";
-import { hash } from "bcrypt";
+import { hash, genSalt } from "bcrypt";
 
 export async function register(req: Request, res: Response) {
   const request = req.body;
-
+  const salt = await genSalt(10);
   const user = new User({
     firstName: request.firstName,
     lastName: request.lastName,
     email: request.email,
-    password: await hash(request.password, 12),
+    password: await hash(request.password, salt),
   });
 
   await user

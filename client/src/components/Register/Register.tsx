@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "../useForm";
+import "./Register.css";
 
 export const Register: React.FC = () => {
   const {
     handleChange,
-    handleSubmit,
+    handleRegister,
     handleBlur,
     errors,
     submitting,
@@ -17,7 +18,8 @@ export const Register: React.FC = () => {
   });
   return (
     <div className="register-container">
-      <form onSubmit={handleSubmit}>
+      <h3>Register</h3>
+      <form onSubmit={handleRegister}>
         <div>
           <label htmlFor="email">Email: </label>
           <input
@@ -50,7 +52,7 @@ export const Register: React.FC = () => {
             className={errors.lastName && "error-input"}
             type="text"
             name="lastName"
-            placeholder="Enter your Last Name"
+            placeholder="Enter your last name"
             value={values.lastName}
             onChange={handleChange}
             onBlur={handleBlur}

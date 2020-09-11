@@ -64,35 +64,53 @@ export const useForm = (initState: User) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const validation = validate();
+    setErrors(validation);
+    setSubmitting(true);
+    fetch("http://localhost:4000/api/login", {
+      method: "POST",
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+      }),
+    });
+  };
+
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const validation = validate();
     setErrors(validation);
     setSubmitting(true);
 
-    console.log(
-      JSON.stringify({
+    fetch("http://localhost:4000/api/register", {
+      method: "POST",
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
         password: values.password,
-      })
-    );
-
-    // fetch("http://localhost:4000/api/register", {
-    //   method: "POST",
-    //   headers: new Headers({
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   }),
-    //   body: JSON.stringify({
-    //     firstName: values.firstName,
-    //     lastName: values.lastName,
-    //     email: values.email,
-    //     password: values.password,
-    //   }),
-    // });
+      }),
+    });
   };
-  return { handleChange, handleSubmit, handleBlur, errors, submitting, values };
+  return {
+    handleChange,
+    handleRegister,
+    handleLogin,
+    handleBlur,
+    errors,
+    submitting,
+    values,
+  };
 };

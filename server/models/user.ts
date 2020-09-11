@@ -2,7 +2,14 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-export const User = mongoose.model(
+interface props extends mongoose.Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export const User = mongoose.model<props>(
   "User",
   new Schema({
     firstName: {

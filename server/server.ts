@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 
 import { register } from "./routes/register";
+import { login } from "./routes/login";
 
 const app = express();
 app.use(
@@ -36,6 +37,7 @@ connection.once("open", () => {
 });
 
 app.route("/api/register").post(register);
+app.route("/api/login").post(login);
 
 app.listen(4000, () => {
   console.log("express server started");
