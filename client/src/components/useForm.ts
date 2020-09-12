@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../models/User";
+import { useSelector, useDispatch } from "react-redux";
+import { updateSession } from "../redux/actions";
+import { SystemState } from "../redux/types";
 
 export const useForm = (initState: User) => {
   const [values, setValues] = useState(initState);
   const [errors, setErrors] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
-
+  const { loggedIn } = useSelector((state: SystemState) => {
+    return {
+      loggedIn: state.loggedIn,
+    };
+  });
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
@@ -84,9 +92,8 @@ export const useForm = (initState: User) => {
         email: values.email,
         password: values.password,
       }),
-    }).then(async (res) => {
-      const response = await res.json();
-      localStorage.setItem("user", JSON.stringify(response.email));
+    }).then(() => {
+      dispatch(updateSession({ loggedIn: !loggedIn }));
       history.push("/myaccount");
     });
   };

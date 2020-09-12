@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
+import { updateSession } from "../../redux/actions";
+import { SystemState } from "../../redux/types";
 
 export const Header: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const currUser = localStorage.getItem("user");
+  const { loggedIn } = useSelector((state: SystemState) => {
+    return {
+      loggedIn: state.loggedIn,
+    };
+  });
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (currUser) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, [currUser]);
+  console.log(loggedIn);
 
   return (
     <nav>
@@ -34,8 +35,7 @@ export const Header: React.FC = () => {
         {loggedIn ? (
           <li
             onClick={() => {
-              setLoggedIn(false);
-              localStorage.removeItem("user");
+              dispatch(updateSession({ loggedIn: !loggedIn }));
             }}
           >
             <Link to="/">Logout</Link>
