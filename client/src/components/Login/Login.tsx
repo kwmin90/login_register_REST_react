@@ -41,6 +41,7 @@ export const Login: React.FC = () => {
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
+            autoComplete=""
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>

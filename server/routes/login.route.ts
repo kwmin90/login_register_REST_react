@@ -19,7 +19,7 @@ export const login = async (req: Request, res: Response) => {
     algorithm: "RS256",
     expiresIn: "15m",
   });
-  res.cookie("Token", jwtBearerToken, {
+  res.cookie("token", jwtBearerToken, {
     httpOnly: true,
   });
   return res.status(200).json({

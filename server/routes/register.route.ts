@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../models/user";
 import { hash, genSalt } from "bcrypt";
 
-export async function register(req: Request, res: Response) {
+export const register = async (req: Request, res: Response) => {
   const request = req.body;
   const salt = await genSalt(10);
   const user = new User({
@@ -20,4 +20,4 @@ export async function register(req: Request, res: Response) {
     .catch((err) => {
       res.status(400).send(err);
     });
-}
+};

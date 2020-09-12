@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { User } from "../models/User";
 
 export const useForm = (initState: User) => {
   const [values, setValues] = useState(initState);
   const [errors, setErrors] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     if (submitting) {
@@ -72,6 +75,7 @@ export const useForm = (initState: User) => {
     setSubmitting(true);
     fetch("http://localhost:4000/api/login", {
       method: "POST",
+      credentials: "include",
       headers: new Headers({
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -80,6 +84,10 @@ export const useForm = (initState: User) => {
         email: values.email,
         password: values.password,
       }),
+    }).then(async (res) => {
+      const response = await res.json();
+      localStorage.setItem("user", JSON.stringify(response.email));
+      history.push("/myaccount");
     });
   };
 
