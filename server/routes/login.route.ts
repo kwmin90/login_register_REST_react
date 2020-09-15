@@ -25,5 +25,7 @@ export const login = async (req: Request, res: Response) => {
   return res.status(200).json({
     idToken: jwtBearerToken,
     email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
   });
 };

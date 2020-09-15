@@ -2,18 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
-import { updateSession } from "../../redux/actions";
-import { SystemState } from "../../redux/types";
+import { updateStatus } from "../../redux/status/actions";
+import { RootState } from "../../redux/index";
 
 export const Header: React.FC = () => {
-  const { loggedIn } = useSelector((state: SystemState) => {
+  const { loggedIn } = useSelector((state: RootState) => {
     return {
-      loggedIn: state.loggedIn,
+      loggedIn: state.status.loggedIn,
     };
   });
   const dispatch = useDispatch();
-
-  console.log(loggedIn);
 
   return (
     <nav>
@@ -35,7 +33,7 @@ export const Header: React.FC = () => {
         {loggedIn ? (
           <li
             onClick={() => {
-              dispatch(updateSession({ loggedIn: !loggedIn }));
+              dispatch(updateStatus({ loggedIn: !loggedIn }));
             }}
           >
             <Link to="/">Logout</Link>

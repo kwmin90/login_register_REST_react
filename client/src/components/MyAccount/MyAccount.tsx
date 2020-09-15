@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
+import "./MyAccount.css";
 
 export const MyAccount: React.FC = () => {
-  useEffect(() => {
-    fetch("http://localhost:4000/api/user", {
-      method: "GET",
-      credentials: "include",
-      headers: new Headers({
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }),
-    }).then(async (res) => {
-      console.log(await res.json());
-    });
+  const { email, firstName, lastName } = useSelector((state: RootState) => {
+    return {
+      email: state.user.email,
+      firstName: state.user.firstName,
+      lastName: state.user.lastName,
+    };
   });
 
-  return <div>account</div>;
+  return (
+    <div className="account-container">
+      <div>Email: {email}</div>
+      <div>
+        Name: {firstName} {lastName}
+      </div>
+    </div>
+  );
 };

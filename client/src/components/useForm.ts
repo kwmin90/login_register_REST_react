@@ -2,16 +2,24 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../models/User";
 import { useSelector, useDispatch } from "react-redux";
-import { updateSession } from "../redux/actions";
-import { SystemState } from "../redux/types";
+import { updateStatus } from "../redux/status/actions";
+import { updateUser } from "../redux/user/actions";
+import { RootState } from "../redux/index";
 
 export const useForm = (initState: User) => {
   const [values, setValues] = useState(initState);
   const [errors, setErrors] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
-  const { loggedIn } = useSelector((state: SystemState) => {
+  const { loggedIn } = useSelector((state: RootState) => {
     return {
-      loggedIn: state.loggedIn,
+      loggedIn: state.status.loggedIn,
+    };
+  });
+  const { email, firstName, lastName } = useSelector((state: RootState) => {
+    return {
+      email: state.user.email,
+      firstName: state.user.firstName,
+      lastName: state.user.lastName,
     };
   });
   const dispatch = useDispatch();
@@ -92,8 +100,19 @@ export const useForm = (initState: User) => {
         email: values.email,
         password: values.password,
       }),
-    }).then(() => {
-      dispatch(updateSession({ loggedIn: !loggedIn }));
+    }).then(async (res) => {
+      const response = await res.json();
+      dispatch(
+        updateUser({
+          email: response.email,
+          firstName: response.firstName,
+          lastName: response.lastName,
+        })
+      );
+      dispatch(updateStatus({ loggedIn: !loggedIn }));
+      console.log(email);
+      console.log(firstName);
+      console.log(lastName);
       history.push("/myaccount");
     });
   };
