@@ -15,9 +15,9 @@ export const register = async (req: Request, res: Response) => {
   await user
     .save()
     .then(() => {
-      res.status(200).send(user);
+      res.status(200).send("Registration Successful!");
     })
-    .catch((err) => {
-      res.status(400).send(err);
+    .catch(() => {
+      res.status(400).send("Email already exists!");
     });
 };

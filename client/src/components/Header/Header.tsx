@@ -32,6 +32,7 @@ export const Header: React.FC = () => {
         )}
         {loggedIn ? (
           <li
+            className="float-right"
             onClick={() => {
               dispatch(updateStatus({ loggedIn: !loggedIn }));
             }}
@@ -39,7 +40,7 @@ export const Header: React.FC = () => {
             <Link to="/">Logout</Link>
           </li>
         ) : (
-          <li>
+          <li className="float-right">
             <Link to="/login">Login</Link>
           </li>
         )}

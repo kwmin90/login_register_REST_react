@@ -27,7 +27,7 @@ export const useForm = (initState: User) => {
 
   useEffect(() => {
     if (submitting) {
-      const noErrors = Object.keys(errors).length === 0; //always return false         error always has 4 elements so this doesnt work
+      const noErrors = Object.keys(errors).length === 0;
       if (noErrors) {
         setSubmitting(false);
       } else {
@@ -70,6 +70,11 @@ export const useForm = (initState: User) => {
 
     return error;
   };
+  const validateUser = (errorMessage: string) => {
+    let error = {};
+    Object.assign(error, { email: errorMessage });
+    return error;
+  };
 
   const handleBlur = () => {
     const validation = validate();
@@ -101,19 +106,22 @@ export const useForm = (initState: User) => {
         password: values.password,
       }),
     }).then(async (res) => {
-      const response = await res.json();
-      dispatch(
-        updateUser({
-          email: response.email,
-          firstName: response.firstName,
-          lastName: response.lastName,
-        })
-      );
-      dispatch(updateStatus({ loggedIn: !loggedIn }));
-      console.log(email);
-      console.log(firstName);
-      console.log(lastName);
-      history.push("/myaccount");
+      if (res.ok) {
+        const response = await res.json();
+        dispatch(
+          updateUser({
+            email: response.email,
+            firstName: response.firstName,
+            lastName: response.lastName,
+          })
+        );
+        dispatch(updateStatus({ loggedIn: !loggedIn }));
+        history.push("/myaccount");
+      } else {
+        const errorMessage = await res.text();
+        const validation = validateUser(errorMessage);
+        setErrors(validation);
+      }
     });
   };
 
@@ -136,6 +144,14 @@ export const useForm = (initState: User) => {
         email: values.email,
         password: values.password,
       }),
+    }).then(async (res) => {
+      if (res.ok) {
+        history.push("/login");
+      } else {
+        const errorMessage = await res.text();
+        const validation = validateUser(errorMessage);
+        setErrors(validation);
+      }
     });
   };
   return {
