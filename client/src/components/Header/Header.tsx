@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
@@ -6,6 +6,7 @@ import { updateStatus } from "../../redux/status/actions";
 import { RootState } from "../../redux/index";
 
 export const Header: React.FC = () => {
+  const [show, setShow] = useState(true);
   const { loggedIn } = useSelector((state: RootState) => {
     return {
       loggedIn: state.status.loggedIn,
@@ -25,11 +26,20 @@ export const Header: React.FC = () => {
         link.style.animation = "";
       } else {
         link.style.animation = `navLinkFade 0.5s ease forwards ${
-          index / 7 + 0.5
+          index / 7 + 0.4
         }s`;
       }
     });
     burger?.classList.toggle("toggle");
+    setShow(!show);
+  };
+  const hide = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (e && e.target) {
+      if (show === false) {
+        e.target.click();
+        setShow(!show);
+      }
+    }
   };
 
   return (
@@ -69,8 +79,10 @@ export const Header: React.FC = () => {
       </ul>
       <div
         className="burger"
-        onClick={() => {
-          handleBurger();
+        tabIndex={0}
+        onClick={handleBurger}
+        onBlur={(e) => {
+          hide(e);
         }}
       >
         <div className="line1"></div>

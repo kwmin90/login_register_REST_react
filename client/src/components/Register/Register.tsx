@@ -8,7 +8,7 @@ export const Register: React.FC = () => {
     handleRegister,
     handleBlur,
     errors,
-    submitting,
+    disable,
     values,
   } = useForm({
     email: "",
@@ -73,7 +73,7 @@ export const Register: React.FC = () => {
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
-        <button className="register-submit" disabled={submitting} type="submit">
+        <button className="register-submit" disabled={disable} type="submit">
           Submit
         </button>
       </form>

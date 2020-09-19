@@ -6,7 +6,7 @@ export const Login: React.FC = () => {
   const {
     values,
     errors,
-    submitting,
+    disable,
     handleLogin,
     handleChange,
     handleBlur,
@@ -45,7 +45,7 @@ export const Login: React.FC = () => {
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
-        <button disabled={submitting} type="submit">
+        <button disabled={disable} type="submit">
           Login
         </button>
       </form>
