@@ -2,12 +2,7 @@
 
 Recreated my previous Angular project using following technologies:
 
--React
--redux
--Node.js
--JSON Web Token
--Express
--MongoDB
+-React, redux, Node.js, JSON Web Token, Express and MongoDB
 
 Implemented registration, login, form validation, protected route, and account view.
 
