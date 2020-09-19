@@ -14,9 +14,13 @@ export const MyAccount: React.FC = () => {
 
   return (
     <div className="account-container">
-      <div>Email: {email}</div>
       <div>
-        Name: {firstName} {lastName}
+        <h3>Email: {email}</h3>
+      </div>
+      <div>
+        <h3>
+          Name: {firstName} {lastName}
+        </h3>
       </div>
     </div>
   );

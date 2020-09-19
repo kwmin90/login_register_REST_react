@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
 import { updateStatus } from "../../redux/status/actions";
-import { RootState } from "../../redux/index";
+import { RootState } from "../../redux/";
 
 export const Header: React.FC = () => {
   const [show, setShow] = useState(true);

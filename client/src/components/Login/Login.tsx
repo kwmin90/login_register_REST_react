@@ -15,10 +15,10 @@ export const Login: React.FC = () => {
     password: "",
   });
   return (
-    <div className="login-container">
-      <h3>Login</h3>
+    <div className="form-container">
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
+        <div className="form-element">
           <label htmlFor="email">Email: </label>
           <input
             className={errors.email && "error-input"}
@@ -31,7 +31,7 @@ export const Login: React.FC = () => {
           />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
-        <div>
+        <div className="form-element">
           <label htmlFor="password">Password: </label>
           <input
             className={errors.password && "error-input"}

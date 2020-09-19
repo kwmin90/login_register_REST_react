@@ -1,6 +1,30 @@
-.login-container {
+.form-container {
   margin: auto;
-  width: 60vw;
+  width: 30vw;
   min-width: 300px;
   background-color: white;
+  padding: 5em 0.5em 5em 0.5em;
+}
+body {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 0.5em;
+}
+
+label {
+  float: left;
+  padding-bottom: 0.3em;
+}
+.form-element {
+  padding-bottom: 1em;
+}
+h2 {
+  padding-bottom: 1em;
+}
+button {
+  float: right;
+  padding: 0.4em;
 }

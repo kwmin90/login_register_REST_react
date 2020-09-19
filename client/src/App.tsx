@@ -5,6 +5,7 @@ import { Header } from "./components/Header/Header";
 import { Login } from "./components/Login/Login";
 import { MyAccount } from "./components/MyAccount/MyAccount";
 import { Home } from "./components/Home/Home";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -14,7 +15,11 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/myaccount" component={MyAccount} />
+        <PrivateRoute
+          path="/myaccount"
+          component={MyAccount}
+          redirectTo="/login"
+        />
       </Switch>
     </BrowserRouter>
   );

@@ -17,10 +17,10 @@ export const Register: React.FC = () => {
     password: "",
   });
   return (
-    <div className="register-container">
-      <h3>Register</h3>
+    <div className="form-container">
+      <h2>Register</h2>
       <form onSubmit={handleRegister}>
-        <div>
+        <div className="form-element">
           <label htmlFor="email">Email: </label>
           <input
             className={errors.email && "error-input"}
@@ -33,7 +33,7 @@ export const Register: React.FC = () => {
           />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
-        <div>
+        <div className="form-element">
           <label htmlFor="firstName">First Name: </label>
           <input
             className={errors.firstName && "error-input"}
@@ -46,7 +46,7 @@ export const Register: React.FC = () => {
           />
           {errors.firstName && <p className="error-text">{errors.firstName}</p>}
         </div>
-        <div>
+        <div className="form-element">
           <label htmlFor="lastName">Last Name: </label>
           <input
             className={errors.lastName && "error-input"}
@@ -59,7 +59,7 @@ export const Register: React.FC = () => {
           />
           {errors.lastName && <p className="error-text">{errors.lastName}</p>}
         </div>
-        <div>
+        <div className="form-element">
           <label htmlFor="password">Password: </label>
           <input
             className={errors.password && "error-input"}

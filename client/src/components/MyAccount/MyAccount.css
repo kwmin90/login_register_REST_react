@@ -1,6 +1,7 @@
 .account-container {
   margin: auto;
-  width: 60vw;
+  width: 40vw;
   min-width: 300px;
   background-color: white;
+  padding: 5em 0.5em 5em 0.5em;
 }

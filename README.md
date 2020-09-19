@@ -1,5 +1,14 @@
 # login_register_REST_react
 
-built using: React, redux, JWT, express, MongoDB
+Recreated my previous Angular project using following technologies:
 
-recreating my previous Angular project with React. Work in progress.
+-React
+-redux
+-Node.js
+-JSON Web Token
+-Express
+-MongoDB
+
+Implemented registration, login, form validation, protected route, and account view.
+
+Email confirmation could easily have been implemented using Nodemailer, but decided against it for convenience.
